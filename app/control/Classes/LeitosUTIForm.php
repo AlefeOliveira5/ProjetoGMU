@@ -19,7 +19,7 @@ class LeitosUTIForm extends TPage
         // create the form fields
         $id = new THidden('id');
         //$idPacie = new TDBCombo('idPacie','DB_GMU','Paciente','id','nome_pacie');
-        $nome= new TDBCombo('nome','DB_GMU','Lista_Espera_UTI','id','pacienteID');
+        $dbunique = new TDBUniqueSearch('dbunique', 'exemplos', 'Habilidades', 'id', 'nome','nome asc'  );
         
         // allow just these extensions
         $nome->addValidation("Selecione o Paciente: " , new TRequiredValidator );
