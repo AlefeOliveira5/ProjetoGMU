@@ -162,7 +162,7 @@ class PrescricaoList extends TPage
 
             if ( !empty( $objects ) ) {
                 foreach ( $objects as $object ) { 
-                    $object->data_consulta = TDate::date2br($object->data_consulta);            
+                    //$object->data_consulta = TDate::date2br($object->data_consulta);            
                     $this->datagrid->addItem( $object );
                 }
             }

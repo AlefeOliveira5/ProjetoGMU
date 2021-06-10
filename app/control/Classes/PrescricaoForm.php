@@ -20,7 +20,7 @@ class PrescricaoForm extends TPage{
         //Diagnostico
         $diagnostico  = new TText('diagnostico');
 
-        $exame->setDefaultOption('Selecione');
+        //$exame->setDefaultOption('Selecione');
         
         //Validador
         $medico->addValidation("Medico" , new TRequiredValidator );
@@ -29,7 +29,7 @@ class PrescricaoForm extends TPage{
 
         $data_consulta->setMask('dd/mm/yyyy');
 
-        $this->form->appendPage('Marca Consulta');
+        $this->form->appendPage('Prescrição');
         $this->form->addFields([$id]);     
         $this->form->addFields([new TLabel('Médico <font color="red">*</font>')], [$medico]); 
         $this->form->addFields([new TLabel('Paciente <font color="red">*</font>')], [$paciente]);
@@ -59,7 +59,7 @@ class PrescricaoForm extends TPage{
                 TTransaction::open('DB_GMU');
 
                 $obj = new Consulta ($key);
-                $obj->data_consulta = TDate::date2br($obj->data_consulta);
+                //$obj->data_consulta = TDate::date2br($obj->data_consulta);
                 $this->form->setData($obj);
 
                 TTransaction::close();
@@ -80,7 +80,6 @@ class PrescricaoForm extends TPage{
             $this->form->validate();
 
             $object = $this->form->getData('Prescricao');
-            $object->data_consulta = TDate::date2us($object->data_consulta);
             $object->store();
       
             TTransaction::close();
