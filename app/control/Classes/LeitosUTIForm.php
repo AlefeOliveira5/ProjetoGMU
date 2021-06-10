@@ -19,15 +19,15 @@ class LeitosUTIForm extends TPage
         // create the form fields
         $id = new THidden('id');
         //$idPacie = new TDBCombo('idPacie','DB_GMU','Paciente','id','nome_pacie');
-        $dbunique = new TDBUniqueSearch('dbunique', 'exemplos', 'Habilidades', 'id', 'nome','nome asc'  );
+        $dbunique = new TDBUniqueSearch('dbunique', 'DB_GMU', 'LeitosUTI','Paciente', 'id', 'nome','nome_pacie asc'  );
         
         // allow just these extensions
-        $nome->addValidation("Selecione o Paciente: " , new TRequiredValidator );
+        $dbunique->addValidation("Selecione o Paciente: " , new TRequiredValidator );
         //$idade->addValidation('Idade', new TRequiredValidator);
 
         // add the form fields
         $this->form->addFields([$id]);
-        $this->form->addFields([new TLabel('Selecione o paciente <font color="red">*</font>')], [$nome]);
+        $this->form->addFields([new TLabel('Selecione o paciente <font color="red">*</font>')], [$dbunique]);
         //$this->form->addFields( [new TLabel('Idade', 'red')], [$idade]);
         
         // add the actions
