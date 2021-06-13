@@ -17,7 +17,7 @@ class PrescricaoList extends TPage
         // 
         $opcao = new TCombo('opcao');
         $medico = new TEntry('medico_id');
-        $data_consulta = new TDate('data_consulta');
+        $data_consulta = new TDate('dtconsulta');
 
         $items= array();
     
@@ -53,10 +53,12 @@ class PrescricaoList extends TPage
         // DATA GRID
         $nome = new TDataGridColumn('nome_pacie', 'Nome Paciente', 'left');
         $medico = new TDataGridColumn('nome_medico', 'Médico', 'left');
+        $priori1 = new TDataGridColumn('priori', 'Prioridade', 'left');
         $data_consulta = new TDataGridColumn('data_consulta', 'Data', 'left');
 
         $this->datagrid->addColumn($nome);
         $this->datagrid->addColumn($medico);
+        $this->datagrid->addColumn($priori1);
         $this->datagrid->addColumn($data_consulta);
       
         // fim data grid
@@ -117,7 +119,7 @@ class PrescricaoList extends TPage
 
             TTransaction::open('DB_GMU');
 
-            $object = new Consulta ($param['key']);
+            $object = new Prescricao ($param['key']);
 
             $object->delete();
 

@@ -19,12 +19,32 @@ class Prescricao extends \Adianti\Database\TRecord{
 
     public function get_nome_pacie (){ 
 
-        if ( empty ($this->prescricao ) ) {
-            $this->especialidade = new Especialidade( $this->idpacie);
+        if ( empty ($this->paciente ) ) {
+            $this->paciente = new Paciente( $this->idpacie);
         }
 
-        return $this->prescricao->nome_pacie;
+        return $this->paciente->nome_pacie;
     }
+
+    public function get_nome_medico (){ 
+
+        if ( empty ($this->medico ) ) {
+            $this->medico = new Medico( $this->medico_id);
+        }
+
+        return $this->medico->nome_medico;
+    }
+
+    public function get_priori (){ 
+
+        if ( empty ($this->lista_espera_uti ) ) {
+            $this->lista_espera_uti = new Lista_Espera_UTI( $this->priori_id);
+        }
+
+        return $this->lista_espera_uti->priori;
+    }
+
+
     
     /**
      * Constructor method

@@ -14,8 +14,8 @@ class PrescricaoForm extends TPage{
         $id = new THidden('id');
         $medico= new TDBCombo('medico_id','DB_GMU','Medico','id','nome_medico');
         $paciente= new TDBCombo('idpacie','DB_GMU','Paciente','id','nome_pacie');
-        //$exame= new TDBCombo('exame_id','bancomysql','Exames','id','nome_exame');
-        $data_consulta = new TDate('data_consulta');
+        $priori= new TDBCombo('priori_id','DB_GMU','Lista_Espera_UTI','id','priori');
+        $data_consulta = new TDate('dtconsulta');
         
         //Diagnostico
         $diagnostico  = new TText('diagnostico');
@@ -33,6 +33,7 @@ class PrescricaoForm extends TPage{
         $this->form->addFields([$id]);     
         $this->form->addFields([new TLabel('Médico <font color="red">*</font>')], [$medico]); 
         $this->form->addFields([new TLabel('Paciente <font color="red">*</font>')], [$paciente]);
+        $this->form->addFields([new TLabel('Prioridade <font color="red">*</font>')], [$priori]);
         $this->form->addFields([new TLabel('Data Consulta <font color="red">*</font>')], [$data_consulta]);
         
         $this->form->addFields([new TLabel('')], [TElement::tag('label', '<font color="red">*</font> Campos obrigatórios' ) ]);
@@ -58,7 +59,7 @@ class PrescricaoForm extends TPage{
 
                 TTransaction::open('DB_GMU');
 
-                $obj = new Consulta ($key);
+                $obj = new Prescricao ($key);
                 //$obj->data_consulta = TDate::date2br($obj->data_consulta);
                 $this->form->setData($obj);
 
