@@ -15,15 +15,7 @@ class Lista_Espera_UTI extends \Adianti\Database\TRecord{
     const TABLENAME = 'lista_espera_uti';
     const PRIMARYKEY= 'id';
     const IDPOLICY =  'serial'; // {max, serial}
-
-    public function get_nome_pacie (){ 
-
-        if ( empty ($this->paciente ) ) {
-            $this->paciente = new Paciente( $this->pacienteID);
-        }
-
-        return $this->paciente->nome_pacie;
-    }
+    
     public function get_nome_familiar (){ 
 
         if ( empty ($this->familiar ) ) {
