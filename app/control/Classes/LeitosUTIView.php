@@ -36,7 +36,7 @@ class LeitosUTIView extends TPage
         // creates the Card View
         $this->cards = new TCardView;
         $this->cards->setContentHeight(170);
-        $this->cards->setTitleAttribute('{nome}
+        $this->cards->setTitleAttribute('{nome_pacie}
                                             <label class="switch">
                                             <input type="checkbox">
                                             <span class="slider round"></span>
@@ -46,14 +46,14 @@ class LeitosUTIView extends TPage
         $this->setCollectionObject($this->cards);
         
         $this->cards->setItemTemplate('<div style="float:left;width:50%;padding-right:10px">
-                                           <b>Nome</b> <br> {nome} <br>
+                                           <b>Nome</b> <br> {nome_pacie} <br>
                                            </div>');
 
         $edit_action   = new TAction(['LeitosUTIForm', 'onEdit'], ['id'=> '{id}']);
         $delete_action = new TAction([$this, 'onDelete'], ['id'=> '{id}', 'register_state' => 'false']);
         
         $this->cards->addAction($edit_action,   'Edit',   'far:edit bg-blue');
-        //$this->cards->addAction($delete_action, 'Delete', 'far:trash-alt bg-red');
+        $this->cards->addAction($delete_action, 'Delete', 'far:trash-alt bg-red');
     
         $this->pageNavigation = new TPageNavigation;
         $this->pageNavigation->setAction(new TAction([$this, 'onReload']));
@@ -153,7 +153,7 @@ class LeitosUTIView extends TPage
             $repository = new TRepository('LeitosUTI');
 
             $criteria = new TCriteria;
-            $criteria->setProperty('order', 'nome');
+            $criteria->setProperty('order', 'nome_pacie');
 
             if (TSession::getValue('filter_')) {
                 $filters = TSession::getValue('filter_');
@@ -193,14 +193,14 @@ class LeitosUTIView extends TPage
 
         try {
 
-            if( !empty( $data->opcao ) && !empty( $data->nome ) ) {
+            if( !empty( $data->opcao ) && !empty( $data->nome_pacie ) ) {
 
                 $filter = [];
 
                 switch ( $data->opcao ) {
 
                     default:
-                        $filter[] = new TFilter( "LOWER(" . $data->opcao . ")", "LIKE", "NOESC:LOWER( '%" . $data->nome. "%' )" );
+                        $filter[] = new TFilter( "LOWER(" . $data->opcao . ")", "LIKE", "NOESC:LOWER( '%" . $data->nome_pacie. "%' )" );
                         break;
 
                 }

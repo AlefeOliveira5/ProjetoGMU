@@ -15,15 +15,6 @@ class LeitosUTI extends \Adianti\Database\TRecord{
     const TABLENAME = 'leito_uti';
     const PRIMARYKEY= 'id';
     const IDPOLICY =  'serial'; // {max, serial}
-
-    public function get_pacienteID (){ 
-
-        if ( empty ($this->lista_espera_uti ) ) {
-            $this->lista_espera_uti = new Lista_Espera_UTI( $this->nome);
-        }
-
-        return $this->lista_espera_uti->pacienteID;
-    }
     
    /*public function get_nome_pacie (){ 
 

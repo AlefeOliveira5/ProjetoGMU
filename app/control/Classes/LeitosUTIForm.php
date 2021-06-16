@@ -17,20 +17,21 @@ class LeitosUTIForm extends TPage
         $this->form->setClientValidation(true);
         
         // create the form fields
+        $id = new THidden('id');
         $pacID = new THidden('pacID');
-        $pacienteID = new TDBSeekButton('pacienteID', 'DB_GMU', $this->form->getName(),'Lista_Espera_UTI', 'nome_pacie', 'pacID', 'pacienteIDS');
-        
+        $nome_pacie = new TDBSeekButton('nome_pacie', 'DB_GMU', $this->form->getName(),'Lista_Espera_UTI', 'nome_pacie', 'pacID', 'nome_pacie');
+        $nome_pacie->setProperty('placeholder', 'Clique na Lupa.');
+        $nome_pacie->setSize("200");
         // allow just these extensions
         //$dbunique->addValidation("Selecione o Paciente: " , new TRequiredValidator );
         //$idade->addValidation('Idade', new TRequiredValidator);
 
         // add the form fields
-        $pacienteID->setProperty('placeholder', 'Clique na Lupa.');
-        $pacienteID->setSize("200");
         //$this->form->addFields( [new TLabel('Idade', 'red')], [$idade]);
         
         // add the actions
-        $this->form->addFields([new TLabel('Paciente')], [$pacienteID],[$pacID]);
+        $this->form->addFields([$id]);
+        $this->form->addFields([new TLabel('Paciente')], [$nome_pacie],[$pacID]);
 
         $this->form->addAction('Salvar', new TAction(array($this, 'onSave')), 'fa:save')->class = 'btn btn-sm btn-primary';
         $this->form->addAction('Voltar', new TAction(array('LeitosUTIView', 'onReload')), 'fa:arrow-left')->class = 'btn btn-sm btn-primary';
