@@ -17,21 +17,20 @@ class LeitosUTIForm extends TPage
         $this->form->setClientValidation(true);
         
         // create the form fields
-        $id = new THidden('id');
-        //$idPacie = new TDBCombo('idPacie','DB_GMU','Paciente','id','nome_pacie');
-        $dbunique = new TDBUniqueSearch('dbunique', 'DB_GMU', 'LeitosUTI','Paciente', 'id', 'nome','nome_pacie asc'  );
+        $pacID = new THidden('pacID');
+        $pacienteID = new TDBSeekButton('pacienteID', 'DB_GMU', $this->form->getName(),'Lista_Espera_UTI', 'nome_pacie', 'pacID', 'pacienteIDS');
         
         // allow just these extensions
-        $dbunique->addValidation("Selecione o Paciente: " , new TRequiredValidator );
+        //$dbunique->addValidation("Selecione o Paciente: " , new TRequiredValidator );
         //$idade->addValidation('Idade', new TRequiredValidator);
 
         // add the form fields
-        $this->form->addFields([$id]);
-        $this->form->addFields([new TLabel('Selecione o paciente <font color="red">*</font>')], [$dbunique]);
+        $pacienteID->setProperty('placeholder', 'Clique na Lupa.');
+        $pacienteID->setSize("200");
         //$this->form->addFields( [new TLabel('Idade', 'red')], [$idade]);
         
         // add the actions
-        $this->form->addFields([new TLabel('')], [TElement::tag('label', '<font color="red">*</font> Campos obrigatórios' ) ]);
+        $this->form->addFields([new TLabel('Paciente')], [$pacienteID],[$pacID]);
 
         $this->form->addAction('Salvar', new TAction(array($this, 'onSave')), 'fa:save')->class = 'btn btn-sm btn-primary';
         $this->form->addAction('Voltar', new TAction(array('LeitosUTIView', 'onReload')), 'fa:arrow-left')->class = 'btn btn-sm btn-primary';

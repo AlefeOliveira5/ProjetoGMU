@@ -9,8 +9,9 @@ class ListaEsperaUTIForm extends TPage{
         $this->form = new BootstrapFormBuilder('form_lista_espera_UTI');
         $this->form->setFormTitle('Cadastro Lista Espera UTI');
 
-        $id = new THidden('id');
-        $pacID= new TDBCombo('pacienteID','DB_GMU','Paciente','id','nome_pacie');
+        //$id = new THidden('id');
+        $pacienteID = new THidden('pacienteID');
+        $nome_pacie = new TDBSeekButton('nome_pacie', 'DB_GMU', $this->form->getName(),'Paciente', 'nome_pacie', 'pacienteID', 'nome_pacie');
         $acomp= new TDBCombo('acompID','DB_GMU','Acompanhante','id','nome_familiar');
         $priori = new TEntry('priori');
         $telA = new TEntry('telAcomp');
@@ -19,15 +20,16 @@ class ListaEsperaUTIForm extends TPage{
 
         
         //Validador
-        $pacID->addValidation("Nome Paciente" , new TRequiredValidator );
+        //$nome_pacie->addValidation("Paciente" , new TRequiredValidator );
         $acomp->addValidation("Acompanhante" , new TRequiredValidator );
         $priori->addValidation("Prioridade" , new TRequiredValidator );
         $telA->addValidation("Celular Acompanhante" , new TRequiredValidator );
         
-
+        $nome_pacie->setProperty('placeholder', 'Clique na Lupa.');
+        $nome_pacie->setSize("200");
         
-        $this->form->addFields([$id]);     
-        $this->form->addFields([new TLabel('Nome Paciente <font color="red">*</font>')], [$pacID]);
+        //$this->form->addFields([$id]);     
+        $this->form->addFields([new TLabel('Paciente')], [$nome_pacie],[$pacienteID]);
         $this->form->addFields([new TLabel('Acompanhante <font color="red">*</font>')], [$acomp]);
         $this->form->addFields([new TLabel('Tipo de Prioridade <font color="red">*</font>')], [$priori]);
         $this->form->addFields([new TLabel('')], [TElement::tag('label', '<font color="red">*</font><i>ATENÇÃO: Deve Ser Definido o tipo de Prioridade Como:
