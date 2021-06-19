@@ -16,20 +16,20 @@ class MedicoList extends TPage
 
         
         $opcao = new TCombo('opcao');
-        $nome = new TEntry('nome_medico');
+        $nome = new TEntry('nome');
         $crm2 = new TEntry('CRM');
         $email = new TEntry('email');
         $espec = new TEntry('espec_id');
 
         $items= array();
-        $items['nome_medico'] = 'Nome Médico';
+        $items['nome'] = 'Nome Médico';
         $items['CRM'] = 'CRM';
         $items['email'] = 'Email';
         $items['espec_id'] = 'Especialidade';
         
 
         $opcao->addItems($items);
-        $opcao->setValue('nome_medico');
+        $opcao->setValue('nome');
         $opcao->setValue('CRM');
         $opcao->setValue('email');
 
@@ -55,7 +55,7 @@ class MedicoList extends TPage
         $this->datagrid->setHeight(320);
 
         // DATA GRID
-        $nome_medico = new TDataGridColumn('nome_medico', 'Nome Médico', 'left');
+        $nome_medico = new TDataGridColumn('nome', 'Nome Médico', 'left');
         $espec2 = new TDataGridColumn('nome_espec', 'Especialidade', 'left');
         $crm2 = new TDataGridColumn('CRM', 'CRM', 'left');
         $email = new TDataGridColumn('email', 'Email', 'left');
@@ -153,7 +153,7 @@ class MedicoList extends TPage
             $repository = new TRepository('Medico');
 
             $criteria = new TCriteria;
-            $criteria->setProperty('order', 'nome_medico');
+            $criteria->setProperty('order', 'nome');
 
             if (TSession::getValue('filter_')) {
                 $filters = TSession::getValue('filter_');
@@ -194,14 +194,14 @@ class MedicoList extends TPage
 
         try {
 
-            if( !empty( $data->opcao ) && !empty( $data->nome_medico ) ) {
+            if( !empty( $data->opcao ) && !empty( $data->nome ) ) {
 
                 $filter = [];
 
                 switch ( $data->opcao ) {
 
                     default:
-                        $filter[] = new TFilter( "LOWER(" . $data->opcao . ")", "LIKE", "NOESC:LOWER( '%" . $data->nome_medico . "%' )" );
+                        $filter[] = new TFilter( "LOWER(" . $data->opcao . ")", "LIKE", "NOESC:LOWER( '%" . $data->nome . "%' )" );
                         break;
 
                 }

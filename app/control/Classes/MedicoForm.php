@@ -11,7 +11,7 @@ class MedicoForm extends TPage{
 
         $id = new THidden('id');
         $espec= new TDBCombo('espec_id','DB_GMU','Especialidade','id','nome_espec');
-        $nome_medico = new TEntry('nome_medico');
+        $nome_medico = new TEntry('nome');
         $crm2 = new TEntry('CRM');
         $cpf = new TEntry('cpf');
         $email = new TEntry('email');

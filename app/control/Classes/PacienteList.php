@@ -16,20 +16,20 @@ class PacienteList extends TPage
 
         
         $opcao = new TCombo('opcao');
-        $nome = new TEntry('nome_pacie');
+        $nome = new TEntry('nome');
         $idade = new TEntry('idade');
         $celular = new TEntry('celular');
         $dtNasc = new TEntry('dt_nasc_pacie');
 
         $items= array();
-        $items['nome_pacie'] = 'Nome Paciente';
+        $items['nome'] = 'Nome Paciente';
         $items['idade'] = 'Idade';
         $items['celular'] = 'Celular';
         $items['dt_nasc_pacie'] = 'Data de Nascimento';
         
 
         $opcao->addItems($items);
-        $opcao->setValue('nome_pacie');
+        $opcao->setValue('nome');
         $opcao->setValue('idade');
         $opcao->setValue('celular');
         $opcao->setValue('dt_nasc_pacie');
@@ -55,7 +55,7 @@ class PacienteList extends TPage
         $this->datagrid->setHeight(320);
 
         // DATA GRID
-        $nome_pacie = new TDataGridColumn('nome_pacie', 'Nome Paciente', 'left');
+        $nome_pacie = new TDataGridColumn('nome', 'Nome Paciente', 'left');
         $idade = new TDataGridColumn('idade', 'Idade', 'left');
         $dtPacie = new TDataGridColumn('dt_nasc_pacie', 'Data de Nascimento', 'left');
         $cel = new TDataGridColumn('celular', 'Celular', 'left');
@@ -153,7 +153,7 @@ class PacienteList extends TPage
             $repository = new TRepository('Paciente');
 
             $criteria = new TCriteria;
-            $criteria->setProperty('order', 'nome_pacie');
+            $criteria->setProperty('order', 'nome');
 
             if (TSession::getValue('filter_')) {
                 $filters = TSession::getValue('filter_');
@@ -194,14 +194,14 @@ class PacienteList extends TPage
 
         try {
 
-            if( !empty( $data->opcao ) && !empty( $data->nome_pacie ) ) {
+            if( !empty( $data->opcao ) && !empty( $data->nome ) ) {
 
                 $filter = [];
 
                 switch ( $data->opcao ) {
 
                     default:
-                        $filter[] = new TFilter( "LOWER(" . $data->opcao . ")", "LIKE", "NOESC:LOWER( '%" . $data->nome_pacie . "%' )" );
+                        $filter[] = new TFilter( "LOWER(" . $data->opcao . ")", "LIKE", "NOESC:LOWER( '%" . $data->nome . "%' )" );
                         break;
 
                 }

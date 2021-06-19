@@ -16,27 +16,27 @@ class ListaEsperaUTIList extends TPage
 
         
         $opcao = new TCombo('opcao');
-        $nome = new TEntry('pacienteID');
+        $nome_pacie = new TEntry('pacienteID');
         $acompID = new TEntry('acompID');
-        $prio = new TEntry('priori');
+        $prio = new TEntry('nome_priori');
 
         $items= array();
-        $items['pacienteID'] = 'Nome Paciente';
+        $items['nome_pacie'] = 'Nome Paciente';
         $items['acompID'] = 'Acompanhante';
-        $items['priori'] = 'Tipo de Prioridade';
+        $items['nome_priori'] = 'Tipo de Prioridade';
         
 
         $opcao->addItems($items);
         $opcao->setValue('nome_pacie');
-        $opcao->setValue('priori');
+        $opcao->setValue('nome_priori');
 
         $opcao->setDefaultOption(FALSE);
 
-        $nome->setSize('80%');
+        $nome_pacie->setSize('80%');
         $opcao->setSize('80%');
 
         $this->form->addFields( [new TLabel('Selecione o campo')], [$opcao]);
-        $this->form->addFields( [new TLabel('Buscar')], [$nome]);
+        $this->form->addFields( [new TLabel('Buscar')], [$nome_pacie]);
 
         $btn = $this->form->addAction('Buscar', new TAction(array($this, 'onSearch')), 'fa:search');
         $btn->class = 'btn btn-sm btn-primary';
@@ -54,7 +54,7 @@ class ListaEsperaUTIList extends TPage
         // DATA GRID
         $nome_pacie = new TDataGridColumn('nome_pacie', 'Nome Paciente', 'left');
         $acompID = new TDataGridColumn('nome_familiar', 'Acompanhante', 'left');
-        $prio = new TDataGridColumn('priori', 'Tipo de Prioridade', 'left');
+        $prio = new TDataGridColumn('nome_priori', 'Tipo de Prioridade', 'left');
        
 
         $this->datagrid->addColumn($nome_pacie);
@@ -117,7 +117,7 @@ class ListaEsperaUTIList extends TPage
 
             TTransaction::open('DB_GMU');
 
-            $object = new Paciente ($param['key']); // SEU RECORD <
+            $object = new Lista_Espera_UTI ($param['key']); // SEU RECORD <
 
             $object->delete();
 
@@ -147,7 +147,7 @@ class ListaEsperaUTIList extends TPage
             $repository = new TRepository('Lista_Espera_UTI');
 
             $criteria = new TCriteria;
-            $criteria->setProperty('order', 'priori');
+            $criteria->setProperty('order', 'nome_pacie');
 
             if (TSession::getValue('filter_')) {
                 $filters = TSession::getValue('filter_');
@@ -188,14 +188,14 @@ class ListaEsperaUTIList extends TPage
 
         try {
 
-            if( !empty( $data->opcao ) && !empty( $data->priori ) ) {
+            if( !empty( $data->opcao ) && !empty( $data->nome_pacie ) ) {
 
                 $filter = [];
 
                 switch ( $data->opcao ) {
 
                     default:
-                        $filter[] = new TFilter( "LOWER(" . $data->opcao . ")", "LIKE", "NOESC:LOWER( '%" . $data->priori . "%' )" );
+                        $filter[] = new TFilter( "LOWER(" . $data->opcao . ")", "LIKE", "NOESC:LOWER( '%" . $data->nome_pacie . "%' )" );
                         break;
 
                 }

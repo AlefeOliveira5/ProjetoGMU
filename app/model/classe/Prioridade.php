@@ -11,11 +11,11 @@
  *
  * @author Alefe
  */
-class Prescricao extends \Adianti\Database\TRecord{
-    const TABLENAME = 'prescricao';
+class Prioridade extends \Adianti\Database\TRecord{
+    const TABLENAME = 'prioridades';
     const PRIMARYKEY= 'id';
     const IDPOLICY =  'serial'; // {max, serial}
-
+    
     /**
      * Constructor method
      */

@@ -16,18 +16,18 @@ class PrescricaoList extends TPage
 
         // 
         $opcao = new TCombo('opcao');
-        $medico = new TEntry('medico_id');
-        $data_consulta = new TDate('dtconsulta');
+        $medico = new TEntry('nome_medico');
+        $data_consulta = new TEntry('dtconsulta');
 
         $items= array();
     
-        $items['medico_id'] = 'Médico';
-        $items['data_consulta'] = 'Data';
+        $items['nome_medico'] = 'Nome Médico';
+        $items['dtconsulta'] = 'Data Prescrição';
 
         $opcao->addItems($items);
 
-        $opcao->setValue('medico_id');
-        $opcao->setValue('data_consulta');
+        $opcao->setValue('nome_medico');
+        $opcao->setValue('dtconsulta');
 
         $opcao->setDefaultOption(FALSE);
 
@@ -53,13 +53,11 @@ class PrescricaoList extends TPage
         // DATA GRID
         $nome = new TDataGridColumn('nome_pacie', 'Nome Paciente', 'left');
         $medico = new TDataGridColumn('nome_medico', 'Médico', 'left');
-        $priori1 = new TDataGridColumn('priori', 'Prioridade', 'left');
-        $data_consulta = new TDataGridColumn('data_consulta', 'Data', 'left');
+        $dtCons = new TDataGridColumn('dtconsulta', 'Data Prescrição', 'left');
 
         $this->datagrid->addColumn($nome);
         $this->datagrid->addColumn($medico);
-        $this->datagrid->addColumn($priori1);
-        $this->datagrid->addColumn($data_consulta);
+        $this->datagrid->addColumn($dtCons);
       
         // fim data grid
 
@@ -149,7 +147,7 @@ class PrescricaoList extends TPage
             $repository = new TRepository('Prescricao');
 
             $criteria = new TCriteria;
-            $criteria->setProperty('order', 'idpacie');
+            $criteria->setProperty('order', 'nome_pacie');
 
             if (TSession::getValue('filter_')) {
                 $filters = TSession::getValue('filter_');

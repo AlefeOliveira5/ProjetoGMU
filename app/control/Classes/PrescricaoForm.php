@@ -8,38 +8,36 @@ class PrescricaoForm extends TPage{
 
     public function __construct(){
         parent::__construct();
-        $this->form = new BootstrapFormBuilder('form_Consulta');
-        $this->form->setFormTitle('Consulta');
+        $this->form = new BootstrapFormBuilder('form_Prescricao');
+        $this->form->setFormTitle('Prescrição');
 
         $id = new THidden('id');
-        $medico= new TDBCombo('medico_id','DB_GMU','Medico','id','nome_medico');
-        $paciente= new TDBCombo('idpacie','DB_GMU','Paciente','id','nome_pacie');
-        $priori= new TDBCombo('priori_id','DB_GMU','Lista_Espera_UTI','id','priori');
+        $idpacie = new THidden('idpacie');
+        $medico_id = new THidden('medico_id');
+        $nome_medico = new TDBSeekButton('nome_medico', 'DB_GMU', $this->form->getName(),'Medico', 'nome', 'medico_id', 'nome_medico');
+        $nome_medico->setProperty('placeholder', 'Clique na Lupa.');
+        $nome_medico->setSize("200");
+        $nome_pacie = new TDBSeekButton('nome_pacie', 'DB_GMU', $this->form->getName(),'Paciente', 'nome', 'idpacie', 'nome_pacie');
+        $nome_pacie->setProperty('placeholder', 'Clique na Lupa.');
+        $nome_pacie->setSize("200");
         $data_consulta = new TDate('dtconsulta');
         
         //Diagnostico
         $diagnostico  = new TText('diagnostico');
-
-        //$exame->setDefaultOption('Selecione');
         
         //Validador
-        $medico->addValidation("Medico" , new TRequiredValidator );
-        $paciente->addValidation("Paciente" , new TRequiredValidator );
-        $data_consulta->addValidation("Data Consulta" , new TRequiredValidator );
+        $data_consulta->addValidation("Data Prescrição" , new TRequiredValidator );
 
         $data_consulta->setMask('dd/mm/yyyy');
 
         $this->form->appendPage('Prescrição');
         $this->form->addFields([$id]);     
-        $this->form->addFields([new TLabel('Médico <font color="red">*</font>')], [$medico]); 
-        $this->form->addFields([new TLabel('Paciente <font color="red">*</font>')], [$paciente]);
-        $this->form->addFields([new TLabel('Prioridade <font color="red">*</font>')], [$priori]);
-        $this->form->addFields([new TLabel('Data Consulta <font color="red">*</font>')], [$data_consulta]);
-        
+        $this->form->addFields([new TLabel('Médico <font color="red">*</font>')], [$nome_medico],[$medico_id]); 
+        $this->form->addFields([new TLabel('Paciente <font color="red">*</font>')], [$nome_pacie],[$idpacie]);
+        $this->form->addFields([new TLabel('Data Prescrição <font color="red">*</font>')], [$data_consulta]);
         $this->form->addFields([new TLabel('')], [TElement::tag('label', '<font color="red">*</font> Campos obrigatórios' ) ]);
         
         $this->form->appendPage('Diagnôsticos');
-        //$this->form->addFields([new TLabel('Exame')], [$exame]);
         $this->form->addFields([new TLabel('Diagnôstico <font color="red">*</font>')], [$diagnostico]);
 
         $this->form->addFields([new TLabel('')], [TElement::tag('label', '<font color="red">*</font> Campos obrigatórios' ) ]);
@@ -60,7 +58,6 @@ class PrescricaoForm extends TPage{
                 TTransaction::open('DB_GMU');
 
                 $obj = new Prescricao ($key);
-                //$obj->data_consulta = TDate::date2br($obj->data_consulta);
                 $this->form->setData($obj);
 
                 TTransaction::close();
