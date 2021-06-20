@@ -28,6 +28,7 @@ class LeitosUTIView extends TPage
         
         $this->form->addAction('Buscar', new TAction([$this, 'onSearch']), 'fa:search blue');
         $this->form->addActionLink('Novo',  new TAction(['LeitosUTIForm', 'onEdit']), 'fa:plus-circle green');
+        $this->form->addActionLink( 'Lista', new TAction(['LeitosUTIList', 'onReload']), 'fa:table blue');
         // keep the form filled with the search data
         $opcao->setValue( TSession::getValue( 'opcao' ) );
 
@@ -36,17 +37,14 @@ class LeitosUTIView extends TPage
         // creates the Card View
         $this->cards = new TCardView;
         $this->cards->setContentHeight(170);
-        $this->cards->setTitleAttribute('{nome_pacie}
-                                            <label class="switch">
-                                            <input type="checkbox">
-                                            <span class="slider round"></span>
-                                            </label>
-                                            <style>C:\laragon\www\template\app\templates\theme4\css\Ligar_desligar.css</style>');
+        $this->cards->setTitleAttribute('#Leito {id} - {nome_pacie}');
         
         $this->setCollectionObject($this->cards);
         
-        $this->cards->setItemTemplate('<div style="float:left;width:50%;padding-right:10px">
-                                           <b>Nome</b> <br> {nome_pacie} <br>
+        $this->cards->setItemTemplate('<div style="float:left;width:40%;padding-right:10px">
+                                           <b>Nome:</b> <br> {nome_pacie} <br>
+                                           <b>Prioridade:</b> <br> {nome} <br>
+                                           <b>Entrada:</b> <br> {dtEntrada} <br>
                                            </div>');
 
         $edit_action   = new TAction(['LeitosUTIForm', 'onEdit'], ['id'=> '{id}']);

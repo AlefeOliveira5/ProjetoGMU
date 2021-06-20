@@ -30,28 +30,30 @@ class LeitosUTIList extends TPage
         
         // create the form fields
         $opcao = new TCombo('opcao');
-        $nome2 = new TEntry('nome');
-        //$ida = new TEntry('idade');
+        $nome2 = new TEntry('nome_pacie');
+        $tipo_Prio = new TEntry('nome');
+        $dtEntry = new TEntry('dtEntrada');
 
         $items= array();
-        $items['nome'] = 'Nome';
-        //$items['idade'] = 'Idade';
+        $items['nome_pacie'] = 'Paciente';
+        $items['nome'] = 'Prioridade';
 
         $opcao->addItems($items);
+        $opcao->setValue('nome_pacie');
         $opcao->setValue('nome');
-        //$opcao->setValue('idade');
 
         $opcao->setDefaultOption(FALSE);
         
         // add a row for the filter field
-        $this->form->addFields( [new TLabel('Nome')], [$opcao] );
-        //$this->form->addFields( [new TLabel('Idade')], [$ida] );
+        $this->form->addFields( [new TLabel('Selecione o campo')], [$opcao]);
+        $this->form->addFields( [new TLabel('Buscar')], [$nome2]);
         
         //$this->form->setData( TSession::getValue('ProductList_filter_data') );
         
         $btn = $this->form->addAction('Buscar', new TAction(array($this, 'onSearch')), 'fa:search');
         $btn->class = 'btn btn-sm btn-primary';
 
+        $this->form->addAction('Voltar', new TAction(array('LeitosUTIView', 'onReload')), 'fa:arrow-left')->class = 'btn btn-sm btn-primary';
         $this->form->addAction('Novo',  new TAction(array('LeitosUTIForm', 'onEdit')), 'fa:plus green');
         $this->form->addAction( 'Limpar Busca' , new TAction(array($this, 'onClear')), 'fa:eraser red');
         
@@ -60,15 +62,19 @@ class LeitosUTIList extends TPage
         
         // creates a DataGrid
         $this->datagrid = new BootstrapDatagridWrapper(new TDataGrid);
-
+        $this->datagrid->datatable = 'true';
+        $this->datagrid->style = 'width: 100%';
+        $this->datagrid->setHeight(320);
         // creates the datagrid columns
-        $pacie = new TDataGridColumn('nome', 'Paciente', 'left');
-        //$col_idade = new TDataGridColumn('idade', 'Idade', 'right', '15%');
+        $pacie = new TDataGridColumn('nome_pacie', 'Paciente', 'left');
+        $priori = new TDataGridColumn('nome', 'Prioridade', 'left');
+        $dtE = new TDataGridColumn('dtEntrada', 'Data de Entrada', 'left');
+
         
      
         $this->datagrid->addColumn($pacie);
-        //$this->datagrid->addColumn($col_idade);
-        
+        $this->datagrid->addColumn($priori);
+        $this->datagrid->addColumn($dtE);
 
         $actionEdit = new TDataGridAction(array('LeitosUTIForm', 'onEdit'));
         $actionEdit->setLabel('Editar');
