@@ -16,13 +16,13 @@ class Acompanhante extends \Adianti\Database\TRecord{
     const PRIMARYKEY= 'id';
     const IDPOLICY =  'serial'; // {max, serial}
     
-    public function get_nome_pacie (){ 
+    public function get_nome (){ 
 
         if ( empty ($this->paciente ) ) {
             $this->paciente = new Paciente( $this->pacie_id);
         }
 
-        return $this->paciente->nome_pacie;
+        return $this->paciente->nome;
     }
     
     /**

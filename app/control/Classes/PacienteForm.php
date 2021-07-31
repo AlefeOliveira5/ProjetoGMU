@@ -28,7 +28,7 @@ class PacienteForm extends TPage{
 
         
         $this->form->addFields([$id]);     
-        $this->form->addFields([new TLabel('Nome Paciente <font color="red">*</font>')], [$nome]);
+        $this->form->addFields([new TLabel('Nome Paciente <font color="red">*</font>')],[$nome_pacie]);
         $this->form->addFields([new TLabel('Idade <font color="red">*</font>')], [$idade]);
         $this->form->addFields([new TLabel('CPF <font color="red">*</font>')], [$cpf]);
         $this->form->addFields([new TLabel('Data de Nascimento <font color="red">*</font>')], [$dtNasc]);

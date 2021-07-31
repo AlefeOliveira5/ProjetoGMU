@@ -14,7 +14,7 @@ class AcompanhanteForm extends TPage{
 
         $id = new THidden('id');
         $nome_fami = new TEntry('nome_familiar');
-        $pacie_id = new TDBCombo('pacie_id','DB_GMU','Paciente','id','nome_pacie');
+        $pacie_id = new TDBCombo('pacie_id','DB_GMU','Paciente','id','nome');
         $cel = new TEntry('celular');
         $cpf = new TEntry('cpf');
         $idade = new TEntry('idade');

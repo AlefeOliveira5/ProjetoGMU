@@ -24,7 +24,7 @@ class LeitosUTIView extends TPage
         
         $opcao = new TEntry('opcao');
 
-        $this->form->addFields( [new TLabel('Selecione a Opção:')], [$opcao] );
+        $this->form->addFields( [new TLabel('Digite sua Opção:')], [$opcao] );
         
         $this->form->addAction('Buscar', new TAction([$this, 'onSearch']), 'fa:search blue');
         $this->form->addActionLink('Novo',  new TAction(['LeitosUTIForm', 'onEdit']), 'fa:plus-circle green');

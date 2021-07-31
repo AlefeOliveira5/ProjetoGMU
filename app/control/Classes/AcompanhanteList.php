@@ -52,7 +52,7 @@ class AcompanhanteList extends TPage
         
         // DATA GRID
         $nome = new TDataGridColumn('nome_familiar', 'Nome Acompanhante', 'left');
-        $pacie = new TDataGridColumn('nome_pacie', 'Paciente', 'left');
+        $pacie = new TDataGridColumn('nome', 'Paciente', 'left');
         $celular = new TDataGridColumn('celular', 'Celular', 'left');
         $cpf2 = new TDataGridColumn('cpf', 'CPF', 'left');
 

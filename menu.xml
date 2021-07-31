@@ -22,7 +22,7 @@
   </menuitem>
   <menuitem label="Solicitações">
     <action>SystemMessageList</action>
-    <icon>fas:at fa-fw #09803f</icon>
+    <icon>fas:at fa-fw #3aad45</icon>
   </menuitem>
   <menuitem label="Lista de Espera UTI">
     <action>ListaEsperaUTIList</action>
